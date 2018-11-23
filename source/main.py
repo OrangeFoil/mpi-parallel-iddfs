@@ -4,7 +4,6 @@ from mpi4py import MPI
 
 size = MPI.COMM_WORLD.Get_size()
 rank = MPI.COMM_WORLD.Get_rank()
-name = MPI.Get_processor_name()
 
 
 def do_some_task(n: int):
@@ -44,8 +43,7 @@ while not solution_found:
             else:
                 print("Node", i, "did not find a solution for n =", data[i][1])
 
-    # distribute solution_found variable
+    # coordination
     if rank == 0:
-        solution_found = [solution_found for _ in range(size)]
         batch += 1
-    solution_found = MPI.COMM_WORLD.scatter(solution_found, root=0)
+    solution_found = MPI.COMM_WORLD.bcast(solution_found, root=0)
