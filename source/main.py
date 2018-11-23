@@ -9,9 +9,9 @@ name = MPI.Get_processor_name()
 
 def do_some_task(n: int):
     if n == 42:
-        return True, "I am #42"
+        return (True, n, "I am #42")
     else:
-        return False, None
+        return (False, n, None)
 
 # distribute tasks
 if rank == 0:
@@ -29,7 +29,11 @@ else:
 # collect results
 data = MPI.COMM_WORLD.gather(data, root=0)
 if rank == 0:
-    for i in range(size):
-        print("Node", i, "reported", data[i])
+    for i in range(1, size):
+        if data[i][0]:
+            print("Node", i, "found a solution for n =",
+                  data[i][1], "=>", data[i][2])
+        else:
+            print("Node", i, "did not find a solution for n =", data[i][1])
 else:
     assert data is None
