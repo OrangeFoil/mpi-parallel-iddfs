@@ -28,15 +28,14 @@ echo "--------------------------------------------------------------"
 docker exec mpi-master mpirun --allow-run-as-root --host $hosts python3 main.py
 echo "--------------------------------------------------------------"
 
-echo "Stopping master"
-docker stop mpi-master
-
-echo "Stopping worker nodes"
+echo "Stopping master and worker nodes"
+cointainers="mpi-master"
 i=0
 while [ $i -lt $NODES ]; do
-    docker stop mpi-node$i
+    cointainers="$cointainers mpi-node$i"
     ((i++))
 done
+docker stop $cointainers
 
 echo "Deleting Docker network"
 docker network rm mpi-net
