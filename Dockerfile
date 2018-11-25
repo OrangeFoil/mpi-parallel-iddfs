@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y dropbear mpi-default-bin mpi-default-de
 RUN passwd -d root
 
 # compile our MPI application
-COPY source/* /root/
+COPY source/ /root/
 WORKDIR /root
 
 # expose port 22 and start lightweight ssh server by default
