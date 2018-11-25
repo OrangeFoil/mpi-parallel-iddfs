@@ -15,7 +15,7 @@ class AbstractStrategy(ABC):
     @abstractmethod
     def get_solution(self):
         # return "Initial State:" + str(self.problem.create_initial_state())
-        return "Initial State:" + "Missing TODO"
+        return "Initial State:" + str(self.problem.create_initial_state())
 
     def print_resource_usage_report(self):
         pass

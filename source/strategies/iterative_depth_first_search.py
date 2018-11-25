@@ -58,7 +58,7 @@ class IterativeDepthFirstSearch(AbstractStrategy):
         return (False, depth_limit, None)
 
     def get_solution(self):
-        solution = super().get_solution() + '\n'
+        solution = str(self.problem.create_initial_state()) + '\n'
         # backtrace from goal_node to root
         path = []
         node = self.goal_node
@@ -68,7 +68,7 @@ class IterativeDepthFirstSearch(AbstractStrategy):
         path.reverse()
 
         for node in path:
-            solution += "Action: {:50} State: {}".format(
+            solution += "Action: {:50} State: {}\n".format(
                 str(node.action), str(node.state))
 
         return solution
