@@ -1,14 +1,14 @@
 #!/bin/python3
 
 from mpi4py import MPI
-from problems.standard_water_jug_problem import StandardWaterJugProblem
+from problems.standard_water_jug_problem import StandardWaterJugProblemState
 from strategies.iterative_depth_first_search import IterativeDepthFirstSearch
 
 size = MPI.COMM_WORLD.Get_size()
 rank = MPI.COMM_WORLD.Get_rank()
 
 
-problem = StandardWaterJugProblem
+problem = StandardWaterJugProblemState
 strategy = IterativeDepthFirstSearch(problem)
 
 # coordination
@@ -29,7 +29,12 @@ while not solution_found:
     if rank == 0:
         data = None
     else:
-        data = strategy.iddfs(n)
+        if strategy.iddfs(n):
+            # solution found
+            data = (True, n, strategy.get_solution())
+        else:
+            # no solution found
+            data = (False, n, None)
 
     # collect results
     data = MPI.COMM_WORLD.gather(data, root=0)

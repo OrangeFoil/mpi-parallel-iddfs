@@ -1,11 +1,11 @@
 from abc import ABC, abstractmethod
 
-from problems.abstract_problem import AbstractProblem
+from problems.abstract_problem import AbstractProblemState
 
 
 class AbstractStrategy(ABC):
 
-    def __init__(self, problem: AbstractProblem):
+    def __init__(self, problem: AbstractProblemState):
         self.problem = problem
 
     @abstractmethod
@@ -13,9 +13,8 @@ class AbstractStrategy(ABC):
         pass
 
     @abstractmethod
-    def get_solution(self):
-        # return "Initial State:" + str(self.problem.create_initial_state())
-        return "Initial State:" + str(self.problem.create_initial_state())
+    def print_solution(self):
+        print("Initial State:", self.problem.create_initial_state())
 
     def print_resource_usage_report(self):
         pass

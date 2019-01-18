@@ -1,6 +1,9 @@
 #!/bin/bash
 NODES=8
 
+echo "Building Docker image"
+docker build -t mpi-parallel-iddfs .
+
 echo "Creating Docker network"
 docker network create mpi-net
 

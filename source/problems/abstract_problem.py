@@ -2,7 +2,8 @@ from abc import ABC, abstractmethod, abstractstaticmethod
 from typing import List
 
 
-class AbstractState(ABC):
+class AbstractProblemState(ABC):
+    """Formalization of an abstract problem"""
 
     @abstractmethod
     def __str__(self):
@@ -11,25 +12,17 @@ class AbstractState(ABC):
     def __repr__(self):
         return self.__str__()
 
-
-class AbstractAction(ABC):
-
     @abstractstaticmethod
-    def execute(state: AbstractState) -> AbstractState:
+    def create_initial_state() -> 'AbstractProblemState':
         pass
 
-
-class AbstractProblem(ABC):
-    """Formalization of an abstract problem"""
-
-    @abstractstaticmethod
-    def create_initial_state() -> AbstractState:
+    @abstractmethod
+    def get_actions(self):
         pass
 
-    @abstractstaticmethod
-    def get_actions() -> List[AbstractAction]:
-        pass
+    def heuristic(self) -> int:
+        return None
 
-    @abstractstaticmethod
-    def is_goal_state(state: AbstractState) -> bool:
+    @abstractmethod
+    def is_goal_state(self) -> bool:
         pass
