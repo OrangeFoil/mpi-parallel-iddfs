@@ -1,6 +1,7 @@
 # MPI Project - Winter Semester 2018/2019
-Builds a docker image with an application using the *Message Passing Interface* (MPI) 
-and runs it in a dockerized MPI cluster.
+Builds a docker image for simulating a MPI cluster. 
+The goal is to run a parallelized version of the iterative deepening depth-first search (IDDFS) algorithm.
+The algorithm and formalizations tree search problems is loaded from [another git repository](https://github.com/OrangeFoil/artificial-intelligence-ws-18-19) via a git submodule.  
 
 ## Prerequisites
 * Bash
