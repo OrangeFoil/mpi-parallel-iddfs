@@ -28,7 +28,7 @@ done
 
 echo "Executing mpirun on the master"
 echo "--------------------------------------------------------------"
-docker exec mpi-master mpirun --allow-run-as-root --host $hosts python3 main.py
+docker exec mpi-master mpirun --allow-run-as-root --host $hosts python3 mpi.py
 echo "--------------------------------------------------------------"
 
 echo "Stopping master and worker nodes"
